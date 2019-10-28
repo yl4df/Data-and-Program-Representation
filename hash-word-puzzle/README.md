@@ -1,0 +1,5 @@
+# Word Puzzle Solver
+
+I implemented a solution to the word puzzle problem described below by using self-designed hash table. The hash table is built based on vector.
+The basic idea is that given a dictionary of words, we want to write a program that finds all instances of those words in a grid of letters. This is similar to the word search puzzles where you circle the words, horizontally, vertically or diagonally in the grid. As specified above, words can appear in any order (including backwards) in the puzzle. However, in our case you are not given the list of words to find, you are merely given the grid and told to find all the English words in the grid. You will be given a dictionary (list) of English words, but you should expect this to be very large. You will want to put this list of words into a hash table to facilitate quickly checking if a particular combination of letters is a word in the dictionary.
+The program take in the file names as command-line parameters. The first is the dictionary file, the second is the grid file.
