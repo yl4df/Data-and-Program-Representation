@@ -1,0 +1,21 @@
+C006 000        jmp   start   skip around vars
+0014 001 length dw    14      length=14
+0001 002        dw    1
+0000 003 lnum   dw    0       line number = 0  
+3000 004        dw            load helper
+0000 005        dw    0
+3005 006 start  load  0
+4003 007        store lnum    always reset lnum to be zero
+3001 008 loop   load  size    acc = size
+6003 009        sub   lnum    acc = size - lnum
+E014 00A        jmpl  end     jump to end when lnum > size
+3004 00B        load          load the load helper
+5003 00C        add   lnum    add the line number to load helper
+400E 00D        store doit    doit will help us to load line by line
+0000 00E doit   dw
+1800 00F        printH        print the line in our acc
+3003 010        load  lnum
+5002 011        add   1
+4003 012        store lnum    lnum = lnum + 1
+C008 013        jmp   loop
+0000 014 end  

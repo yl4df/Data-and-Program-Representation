@@ -1,0 +1,25 @@
+C007 000       jmp    start skip around the variables
+0000 001 a     dw     0     int a
+0000 002 b     dw     0     int b
+0000 003 c     dw     0     int c
+0000 004 zero  dw     0
+0000 005                    leave space for changes
+0000 006
+1000 007 start readH        read a
+4001 008       store  a
+1000 009       readH        read b
+4002 00A       store  b
+1000 00B       readH        read c
+4003 00C       store  c
+3004 00D       load   zero  set accum = 0
+5001 00E       add a        accum = 0 + a = a
+5002 00F       add b        accum = a + b
+5003 010       add c        accum = a + b + c
+D013 011       jmpe   xit   jump to xit if accum=0
+C007 012       jmp    start else jump to start over
+3001 013 xit   load   a     print a
+1800 014       printH
+3002 015       load   b     print b
+1800 016       printH
+3003 017       load   c     print c
+1800 018       printH 

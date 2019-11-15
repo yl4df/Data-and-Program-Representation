@@ -1,0 +1,34 @@
+C00D 000       jmp   start   skip around vars
+0002 001 a     dw    2      int a[]      
+0001 002 a0    dw    1       a[0] = 1
+0002 003 a1    dw    2       a[1] = 2
+0003 004 a2    dw    3       a[2] = 3
+0004 005 a3    dw    4       a[3] = 4
+0004 006 n     dw    4       size n = 4
+0000 007 m     dw    0       max = 0
+0001 008 one   dw    1
+0000 009 index dw    0       index = 0
+3000 00A adit  dw    3000                 
+0000 00B e     dw    0       element = 0
+0000 00C                     leave spaces
+3006 00D start load  n
+6009 00E       sub   index   acc =  n - index
+D020 00F       jume  end     jump to end if acc = 0
+E020 010       juml  end     jump to end if acc < 0
+300A 011       load  adit    form inst to add a[i]
+5001 012       add   a[]
+5009 013       add   index   acc = a[i]
+4015 014       store doit    plant inst into code
+0000 015 doit  dw    0
+400B 016       store e       e = a[i]
+6007 017       sub   m       acc = a[i] - m
+D01C 018       jume  endl    jump to endloop if acc = 0
+D01C 019       juml  endl    jump to endloop if acc < 0
+300B 01A       load  e       acc = e
+4007 01B       store m       m = acc
+3009 01C endl  load  index   acc = index
+5008 01D       add   one     acc = index + 1
+4009 01E       store index   index = index + 1
+C00D 01F       jmp   start   jump to start
+3007 020 end   load  m       acc = m
+1800 021       printH        print m

@@ -1,0 +1,62 @@
+C012 000        jmp  start
+0005 001 max    dw   5      MAX=5
+0003 002 a      dw   3      a[] base address is 003
+0001 003 a0     dw   1      a0=1
+0007 004 a1     dw   7      a1=7
+000A 005 a2     dw   10     a2=10
+FFFE 006 a3     dw   -2     a3=-2
+0002 007 a4     dw   2      a4=2
+0000 008 i      dw   0      i=0
+0004 009 j      dw   4      j=4
+0001 00A one    dw   1
+0000 00B temp   dw   0      temp=0
+0000 00C w1     dw   0      w1=0
+0000 00D w2     dw   0      w2=0
+3000 00E ldit   dw   3000   load func   
+4000 00F stit   dw   4000   store func
+0000 010
+0000 011                    leaves more spaces
+3001 012 starti load  max   acc = max
+6008 013        sub   i     acc = max-i
+D03D 014        jmpe  endi  jump to endi if acc=0
+E03D 015        jmpl  endi  jump to endi if acc<0
+3009 016 startj load  j     acc=j
+6008 017        sub   i     acc=j-i
+D036 018        jmpe  endj  jump to endj if acc=0
+E036 019        jmpl  endj  jump tp endj if acc<0
+300E 01A        load  ldit  load instruction
+5002 01B        add   a
+5009 01C        add   j     acc=ldit+a+j
+4020 01D        store doit  doit = load instruction for a[j]
+600A 01E        sub   one   acc=ladit+a+j-1
+4022 01F        store doit2 doit2 = load instruction for a[j-1]
+0000 020 doit   dw    0     
+400C 021        store w1
+0000 022 doit2  dw    0
+400D 023        store w2
+300C 024        load  w1
+600D 025        sub   w2    acc=w1-w2
+E028 026        jmpl  sw    jump to sw if w1<w2
+C032 027        jmp   endl  jump to endl else
+300F 028 sw     load  stit  store instruction
+5002 029        add   a     
+5009 02A        add   j     acc=stit+a+j
+402F 02B        store swit  swit = store instruction for a[j]
+600A 02C        sub   one   acc=stit+a+j-1
+4031 02D        store swit2 swit = store instruction ofr a[j-1]
+300D 02E        load  w2
+0000 02F swit   dw    0
+300C 030        load  w1
+0000 031 swit2  dw    0
+3009 032 endl   load  j
+600A 033        sub   one
+4009 034        store j      j=j-1
+C016 035        jmp   startj
+3008 036 endj   load  i
+500A 037        add   one
+4008 038        store i      i=i+1
+3001 039        load  max
+600A 03A        sub   one
+4009 03B        store j      j=max-1
+C012 03C        jmp   starti
+0000 03D endi
